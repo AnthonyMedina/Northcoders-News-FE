@@ -10,6 +10,9 @@ const API = {
     return axios
       .get(`${API_URL}/articles/${article_id}/comments/`)
       .then(obj => obj.data.comments || []);
+  },
+  fetchTopics: topic => {
+    return axios.get(`${API_URL}/topics/`).then(obj => obj.data.topics);
   }
 };
 

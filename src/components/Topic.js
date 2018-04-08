@@ -1,32 +1,44 @@
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
-import Article from "./Article.js";
+import React, { Component, Fragment } from "react";
+import { Route, Link } from "react-router-dom";
+import API from "./utils/API";
+import Article from "./Article";
 
 const Topic = {
   Container: class Container extends Component {
     state = {
       topics: []
     };
+    componentDidMount() {
+      API.fetchTopics().then(topics => {
+        this.setState({
+          topics
+        });
+      });
+    }
     render() {
       const { match } = this.props;
       return (
-        <main className="container">
+        <Fragment>
           <Route
             exact
             path={`${match.url}`}
-            render={props => <Topic.List {...props} />}
+            render={props => (
+              <Topic.List {...props} topics={this.state.topics} />
+            )}
           />
           <Route
-            path={`${match.url}/:topic_id`}
+            path={`${match.url}/:topic_title`}
             render={props => <Topic.Articles {...props} />}
           />
-        </main>
+        </Fragment>
       );
     }
   },
-  List: props => (
+  List: ({ topics }) => (
     <main className="container">
-      <Topic.Card />
+      {topics.map((topic, i) => {
+        return <Topic.Card key={i} topic={topic} />;
+      })}
     </main>
   ),
   Articles: class Articles extends Component {
@@ -43,7 +55,7 @@ const Topic = {
       );
     }
   },
-  Card: props => (
+  Card: ({ topic }) => (
     <div className="col-12 col-md-4 shadow my-3 p-3">
       <img
         className="card-img-top"
@@ -51,7 +63,7 @@ const Topic = {
         alt="Article"
       />
       <div className="card-body">
-        <p className="card-text">Topic Title</p>
+        <Link to={`/topics/${topic._id}`}>{`${topic.title}`}</Link>
       </div>
     </div>
   )

@@ -34,6 +34,7 @@ const Topic = {
       );
     }
   },
+
   List: ({ topics }) => (
     <main className="container">
       {topics.map((topic, i) => {
@@ -45,16 +46,28 @@ const Topic = {
     state = {
       articles: []
     };
+    componentDidMount() {
+      const { topic_title } = this.props.match.params;
+      API.fetchArticlesByTopic(topic_title).then(articles => {
+        this.setState({
+          articles
+        });
+      });
+    }
     render() {
+      if (!this.state.articles) return null;
+      const { topic_title } = this.props.match.params;
       return (
         <div className="container">
+          <h1 className="my-5 text-capitalize">{`${topic_title}`}</h1>
           {this.state.articles.map((article, i) => (
-            <Article.Card key={i} article={article._id} />
+            <Article.Card key={i} article={article} />
           ))}
         </div>
       );
     }
   },
+
   Card: ({ topic }) => (
     <div className="col-12 col-md-4 shadow my-3 p-3">
       <img
@@ -63,7 +76,7 @@ const Topic = {
         alt="Article"
       />
       <div className="card-body">
-        <Link to={`/topics/${topic._id}`}>{`${topic.title}`}</Link>
+        <Link to={`/topics/${topic.slug}`}>{`${topic.title}`}</Link>
       </div>
     </div>
   )

@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 // import PT from "prop-types";
 import { Route, Link } from "react-router-dom";
+import Comment from "./Comment";
 import Icon from "./utils/Icon";
 
 const Article = {
   Container: class Container extends Component {
     state = {
-      articles: [1, 2]
+      articles: []
     };
     render() {
       const { match } = this.props;
@@ -17,6 +18,12 @@ const Article = {
             path={`${match.url}`}
             render={props => (
               <Article.List {...props} articles={this.state.articles} />
+            )}
+          />
+          <Route
+            path={`${match.url}/:article_id`}
+            render={props => (
+              <Article.Complete {...props} articles={this.state.articles} />
             )}
           />
         </main>
@@ -56,6 +63,36 @@ const Article = {
         </Link>
       </div>
     </div>
+  ),
+
+  Complete: props => (
+    <Fragment>
+      <div className="w-75 mx-auto d-flex flex-column p-3">
+        <h1 className="my-3">Article Title</h1>
+        <img
+          className="img-fluid"
+          src="https://source.unsplash.com/collection/190727/700x300"
+          alt="Random"
+        />
+        <div className="d-flex justify-content-between align-items-center my-3">
+          <div className="d-flex flex-column justify-content-around align-items-center">
+            <Icon.upVote />
+            Votes
+            <Icon.downVote />
+          </div>
+          <Link to="">by Avatar and Name</Link>
+          <Link to="">In Topic</Link>
+        </div>
+        <p className="text-justify my-3">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
+          magni iste. Corrupti, enim excepturi. Velit cum ut, cupiditate at,
+          repellendus itaque nesciunt, reiciendis dolores accusamus recusandae
+          suscipit voluptate rerum quaerat.
+        </p>
+        <Comment.Input />
+        <Comment.Card />
+      </div>
+    </Fragment>
   )
 };
 

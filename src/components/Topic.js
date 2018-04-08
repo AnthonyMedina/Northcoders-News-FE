@@ -16,6 +16,10 @@ const Topic = {
             path={`${match.url}`}
             render={props => <Topic.List {...props} />}
           />
+          <Route
+            path={`${match.url}/:topic_id`}
+            render={props => <Topic.Articles {...props} />}
+          />
         </main>
       );
     }
@@ -25,6 +29,18 @@ const Topic = {
       <Topic.Card />
     </main>
   ),
+  Articles: class Articles extends Component {
+    state = {
+      articles: []
+    };
+    render() {
+      return (
+        <div className="container">
+          <Article.Card />
+        </div>
+      );
+    }
+  },
   Card: props => (
     <div class="col-12 col-md-4 shadow my-3 p-3">
       <img

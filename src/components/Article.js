@@ -45,32 +45,40 @@ const Article = {
       <Article.Card key={i} article={article} />
     ));
   },
-  Card: ({
-    article: { title, created_by: name, belongs_to: topic, votes, comments }
-  }) => (
+  Card: ({ article }) => (
     <div className="row my-4 p-3 shadow">
       <div className="col-4 col-md-1 order-md-1 d-flex flex-column justify-content-around align-items-center">
         <Icon.upVote />
-        {`${votes}`}
+        {`${article.votes}`}
         <Icon.downVote />
       </div>
       <div className="col-8 col-md-2 order-md-2">
-        <img
-          className="img-fluid"
-          src="https://source.unsplash.com/collection/190727/300x300"
-          alt="Random"
-        />
+        <Link to={`/articles/${article._id}`}>
+          <img
+            className="img-fluid"
+            src="https://source.unsplash.com/collection/190727/300x300"
+            alt="Random"
+          />
+        </Link>
       </div>
       <div className="col-12 col-md-9 order-md-3">
-        <h4 className="card-title">{`${title}`}</h4>
-        <Link to="" className="card-link text-capitalize">
-          {`by ${name}`}
+        <Link to={`/articles/${article._id}`}>
+          <h4 className="card-title">{`${article.title}`}</h4>
         </Link>
-        <Link to="" className="card-link text-capitalize">
-          {`In ${topic}`}
+        <Link
+          to={`/users/${article.created_by}`}
+          className="card-link text-capitalize"
+        >
+          {`by ${article.created_by}`}
         </Link>
-        <Link to="" className="card-link">
-          {`${comments} comments`}
+        <Link
+          to={`/topics/${article.belongs_to}`}
+          className="card-link text-capitalize"
+        >
+          {`In ${article.belongs_to}`}
+        </Link>
+        <Link to={`/articles/${article._id}`} className="card-link">
+          {`${article.comments} comments`}
         </Link>
       </div>
     </div>

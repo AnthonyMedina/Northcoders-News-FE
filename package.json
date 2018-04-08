@@ -1,0 +1,28 @@
+{
+  "name": "nc-news-fe",
+  "version": "1.0.0",
+  "description": "A react app built to interact with my Northcoders News API",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnthonyMedina/FE-FT-NC-News.git"
+  },
+  "author": "Anthony Medina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnthonyMedina/FE-FT-NC-News/issues"
+  },
+  "homepage": "https://github.com/AnthonyMedina/FE-FT-NC-News#readme",
+  "dependencies": {
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.4"
+  }
+}

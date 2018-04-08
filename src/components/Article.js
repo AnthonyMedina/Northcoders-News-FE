@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 // import PT from "prop-types";
 import { Route, Link } from "react-router-dom";
+import API from "./utils/API";
 import Comment from "./Comment";
 import Icon from "./utils/Icon";
 
@@ -9,6 +10,13 @@ const Article = {
     state = {
       articles: []
     };
+    componentDidMount() {
+      API.fetchArticles().then(articles => {
+        this.setState({
+          articles
+        });
+      });
+    }
     render() {
       const { match } = this.props;
       return (
@@ -16,9 +24,9 @@ const Article = {
           <Route
             exact
             path={`${match.url}`}
-            render={props => (
-              <Article.List {...props} articles={this.state.articles} />
-            )}
+            render={props => {
+              return <Article.List {...props} articles={this.state.articles} />;
+            }}
           />
           <Route
             path={`${match.url}/:article_id`}
@@ -33,14 +41,17 @@ const Article = {
   },
 
   List: ({ articles }) => {
-    return articles.map((article, i) => <Article.Card key={i} />);
+    return articles.map((article, i) => (
+      <Article.Card key={i} article={article} />
+    ));
   },
-
-  Card: props => (
+  Card: ({
+    article: { title, created_by: name, belongs_to: topic, votes, comments }
+  }) => (
     <div className="row my-4 p-3 shadow">
       <div className="col-4 col-md-1 order-md-1 d-flex flex-column justify-content-around align-items-center">
         <Icon.upVote />
-        Votes
+        {`${votes}`}
         <Icon.downVote />
       </div>
       <div className="col-8 col-md-2 order-md-2">
@@ -51,15 +62,15 @@ const Article = {
         />
       </div>
       <div className="col-12 col-md-9 order-md-3">
-        <h4 className="card-title">Article title</h4>
-        <Link to="" className="card-link">
-          by Ant Medina
+        <h4 className="card-title">{`${title}`}</h4>
+        <Link to="" className="card-link text-capitalize">
+          {`by ${name}`}
+        </Link>
+        <Link to="" className="card-link text-capitalize">
+          {`In ${topic}`}
         </Link>
         <Link to="" className="card-link">
-          In Topic
-        </Link>
-        <Link to="" className="card-link">
-          324 Comments
+          {`${comments} comments`}
         </Link>
       </div>
     </div>

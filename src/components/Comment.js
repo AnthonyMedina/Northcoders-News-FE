@@ -1,15 +1,27 @@
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
 // import PT from "prop-types";
-import "./Comment.css";
+import API from "./utils/API";
 import Icon from "./utils/Icon";
+import "./Comment.css";
 
 const Comment = {
   Container: class Container extends Component {
+    state = {
+      comments: []
+    };
+    componentDidMount() {
+      API.fetchComments(this.props.article_id).then(comments => {
+        this.setState({ comments });
+      });
+    }
     render() {
       return (
         <Fragment>
-          <Comment.Card />
           <Comment.Input />
+          {this.state.comments.map((comment, i) => {
+            return <Comment.Card key={i} comment={comment} />;
+          })}
         </Fragment>
       );
     }
@@ -31,18 +43,23 @@ const Comment = {
       </div>
     );
   },
-  Card: props => {
+  Card: ({ comment }) => {
+    if (!comment) return null;
     return (
       <div className="row shadow p-3 my-3">
         <div className="col-2 d-flex flex-column justify-content-around align-items-center">
           <Icon.upVote />
-          Votes
+          {`${comment.votes}`}
           <Icon.downVote />
         </div>
         <div className="col-10">
-          <div className="w-100">Avatar badge and User name</div>
+          <div className="w-100 text-capitalize">
+            <Link to={`/users/${comment.created_by}`}>{`${
+              comment.created_by
+            }`}</Link>
+          </div>
           <div className="w-100" />
-          Comment body....
+          {`${comment.body}`}
         </div>
       </div>
     );

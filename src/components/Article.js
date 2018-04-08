@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 // import PT from "prop-types";
 import { Route, Link } from "react-router-dom";
 import API from "./utils/API";
@@ -69,7 +69,7 @@ const Article = {
           to={`/users/${article.created_by}`}
           className="card-link text-capitalize"
         >
-          {`by ${article.created_by}`}
+          {`By ${article.created_by}`}
         </Link>
         <Link
           to={`/topics/${article.belongs_to}`}
@@ -77,17 +77,23 @@ const Article = {
         >
           {`In ${article.belongs_to}`}
         </Link>
-        <Link to={`/articles/${article._id}`} className="card-link">
+        <Link
+          to={`/articles/${article._id}`}
+          className="card-link text-capitalize"
+        >
           {`${article.comments} comments`}
         </Link>
       </div>
     </div>
   ),
 
-  Complete: props => (
-    <Fragment>
+  Complete: ({ articles, match }) => {
+    const article_id = match.params.article_id;
+    const [article] = articles.filter(article => article._id === article_id);
+    if (!article) return null;
+    return (
       <div className="w-75 mx-auto d-flex flex-column p-3">
-        <h1 className="my-3">Article Title</h1>
+        <h1 className="my-3">{`${article.title}`}</h1>
         <img
           className="img-fluid"
           src="https://source.unsplash.com/collection/190727/700x300"
@@ -96,23 +102,25 @@ const Article = {
         <div className="d-flex justify-content-between align-items-center my-3">
           <div className="d-flex flex-column justify-content-around align-items-center">
             <Icon.upVote />
-            Votes
+            {`${article.votes}`}
             <Icon.downVote />
           </div>
-          <Link to="">by Avatar and Name</Link>
-          <Link to="">In Topic</Link>
+          <Link
+            to={`/users/${article.created_by}`}
+            className="text-capitalize"
+          >{`by ${article.created_by}`}</Link>
+          <Link
+            to={`/topics/${article.belongs_to}`}
+            className="text-capitalize"
+          >
+            In {`${article.belongs_to}`}
+          </Link>
         </div>
-        <p className="text-justify my-3">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-          magni iste. Corrupti, enim excepturi. Velit cum ut, cupiditate at,
-          repellendus itaque nesciunt, reiciendis dolores accusamus recusandae
-          suscipit voluptate rerum quaerat.
-        </p>
-        <Comment.Input />
-        <Comment.Card />
+        <p className="text-justify my-3">{`${article.body}`}</p>
+        <Comment.Container article_id={article_id} />
       </div>
-    </Fragment>
-  )
+    );
+  }
 };
 
 export default Article;

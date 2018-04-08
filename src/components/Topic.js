@@ -36,20 +36,22 @@ const Topic = {
     render() {
       return (
         <div className="container">
-          <Article.Card />
+          {this.state.articles.map((article, i) => (
+            <Article.Card key={i} article={article._id} />
+          ))}
         </div>
       );
     }
   },
   Card: props => (
-    <div class="col-12 col-md-4 shadow my-3 p-3">
+    <div className="col-12 col-md-4 shadow my-3 p-3">
       <img
-        class="card-img-top"
+        className="card-img-top"
         src="https://source.unsplash.com/collection/190727/300x300"
         alt="Article"
       />
-      <div class="card-body">
-        <p class="card-text">Topic Title</p>
+      <div className="card-body">
+        <p className="card-text">Topic Title</p>
       </div>
     </div>
   )

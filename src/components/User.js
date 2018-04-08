@@ -29,9 +29,9 @@ const User = {
   Details: () => <h1>User details here...</h1>,
   List: () => <User.Card />,
   Card: props => (
-    <div class="col-12 col-lg-6 shadow my-3 p-3 d-flex">
+    <div className="col-12 col-lg-6 shadow my-3 p-3 d-flex">
       <img src="" alt="Profile" />
-      <p class="card-text">Username</p>
+      <p className="card-text">Username</p>
     </div>
   ),
   Page: class Page extends Component {

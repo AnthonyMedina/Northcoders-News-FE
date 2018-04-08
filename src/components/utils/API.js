@@ -21,6 +21,10 @@ const API = {
     return axios
       .get(`${API_URL}/topics/${topic_title}/articles/`)
       .then(obj => obj.data.articles);
+  },
+
+  fetchAllUsers: () => {
+    return axios.get(`${API_URL}/users`).then(obj => obj.data.users);
   }
 };
 

@@ -37,20 +37,24 @@ const User = {
     }
   },
 
-  List: ({ users }) => {
-    return users.map((user, i) => <User.Card user={user} key={i} />);
-  },
+  List: ({ users }) => (
+    <div className="d-flex flex-wrap align-content-between">
+      {users.map((user, i) => <User.Card user={user} key={i} />)}
+    </div>
+  ),
 
   Card: ({ user }) => (
-    <div className="col-12 col-lg-6 shadow my-3 p-3 d-flex flex-column">
-      <Link to={`/users/${user.username}/`} className="card-text">{`${
-        user.name
-      }`}</Link>
-      <img
-        src={`${user.avatar_url}`}
-        alt="user avatar"
-        className="rounded-circle h"
-      />
+    <div className="col-6 col-md-4">
+      <div className="shadow w-100 h-100 m-3">
+        <Link to={`/users/${user.username}/`} className="card-text">
+          <h3>{`${user.name}`}</h3>
+          <img
+            src={`${user.avatar_url}`}
+            alt="user avatar"
+            className="rounded-circle w-100"
+          />
+        </Link>
+      </div>
     </div>
   ),
 

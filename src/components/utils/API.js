@@ -25,6 +25,12 @@ const API = {
 
   fetchAllUsers: () => {
     return axios.get(`${API_URL}/users`).then(obj => obj.data.users);
+  },
+
+  voteOnArticle: ({ article_id, vote }) => {
+    return axios
+      .put(`${API_URL}/articles/${article_id}?vote=${vote}`)
+      .then(obj => console.log(obj));
   }
 };
 

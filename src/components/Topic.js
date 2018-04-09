@@ -36,11 +36,13 @@ const Topic = {
   },
 
   List: ({ topics }) => (
-    <main className="container">
-      {topics.map((topic, i) => {
-        return <Topic.Card key={i} topic={topic} />;
-      })}
-    </main>
+    <div className="container">
+      <div className="row">
+        {topics.map((topic, i) => {
+          return <Topic.Card key={i} topic={topic} />;
+        })}
+      </div>
+    </div>
   ),
   Articles: class Articles extends Component {
     state = {
@@ -69,15 +71,15 @@ const Topic = {
   },
 
   Card: ({ topic }) => (
-    <div className="col-12 col-md-4 shadow my-3 p-3">
-      <img
-        className="card-img-top"
-        src="https://source.unsplash.com/collection/190727/300x300"
-        alt="Article"
-      />
-      <div className="card-body">
-        <Link to={`/topics/${topic.slug}`}>{`${topic.title}`}</Link>
-      </div>
+    <div className="col-12 col-md-3 shadow m-3 p-3 ">
+      <Link to={`/topics/${topic.slug}`}>
+        <img
+          className="card-img-top"
+          src="https://source.unsplash.com/collection/190727/300x300"
+          alt="Article"
+        />
+        <div className="">{`${topic.title}`}</div>
+      </Link>
     </div>
   )
 };

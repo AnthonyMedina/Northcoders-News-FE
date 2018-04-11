@@ -31,6 +31,12 @@ const API = {
     return axios
       .put(`${API_URL}/${type}/${id}/?vote=${vote}`)
       .then(obj => obj.data);
+  },
+
+  addComment: article_id => {
+    return axios.post(`${API_URL}/articles/${article_id}/comments`, {
+      comment: "This is my new comment"
+    });
   }
 };
 

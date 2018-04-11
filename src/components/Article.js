@@ -18,12 +18,6 @@ const Article = {
       });
     }
 
-    changeVote = (article_id, queryStr) => {
-      API.voteOnArticle(article_id, queryStr)
-        .then(article => null)
-        .catch(console.log);
-    };
-
     render() {
       const { match } = this.props;
       return (
@@ -60,7 +54,7 @@ const Article = {
   Card: ({ article }) => (
     <div className="row my-4 p-3 shadow">
       <div className="col-4 col-md-1 order-md-1 d-flex flex-column justify-content-around align-items-center">
-        <Vote />
+        <Vote voteObj={article} type={"articles"} />
       </div>
       <div className="col-8 col-md-2 order-md-2">
         <Link to={`/articles/${article._id}`}>

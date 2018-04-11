@@ -29,8 +29,8 @@ const User = {
             render={props => <User.List {...props} users={this.state.users} />}
           />
           <Route
-            path={`${match.url}/:user_id`}
-            render={props => <User.Page />}
+            path={`${match.url}/:username`}
+            render={props => <User.Page {...props} users={this.state.users} />}
           />
         </main>
       );
@@ -64,17 +64,24 @@ const User = {
       comments: []
     };
     render() {
+      const { username } = this.props.match.params;
+      const [user] = this.props.users.filter(
+        user => user.username === username
+      );
       return (
         <div className="w-75 mx-auto p-3">
-          <User.Details />
-          <Article.List articles={this.state.articles} />
-          <Comment.Card />
+          <User.Details user={user} />
+          {/* <Article.List /> */}
+          {/* <Comment.List /> */}
         </div>
       );
     }
   },
 
-  Details: () => <h1>User details here...</h1>
+  Details: ({ user }) => {
+    if (!user) return null;
+    return <h1>{`${user.name}`}</h1>;
+  }
 };
 
 export default User;

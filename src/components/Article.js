@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
 import API from "./utils/API";
 import Comment from "./Comment";
-import Icon from "./utils/Icon";
+import Vote from "./Vote";
 
 const Article = {
   Container: class Container extends Component {
@@ -17,6 +17,13 @@ const Article = {
         });
       });
     }
+
+    changeVote = (article_id, queryStr) => {
+      API.voteOnArticle(article_id, queryStr)
+        .then(article => null)
+        .catch(console.log);
+    };
+
     render() {
       const { match } = this.props;
       return (
@@ -31,7 +38,11 @@ const Article = {
           <Route
             path={`${match.url}/:article_id`}
             render={props => (
-              <Article.Complete {...props} articles={this.state.articles} />
+              <Article.Complete
+                {...props}
+                articles={this.state.articles}
+                changeVote={this.changeVote}
+              />
             )}
           />
         </main>
@@ -45,12 +56,11 @@ const Article = {
       <Article.Card key={i} article={article} />
     ));
   },
+
   Card: ({ article }) => (
     <div className="row my-4 p-3 shadow">
       <div className="col-4 col-md-1 order-md-1 d-flex flex-column justify-content-around align-items-center">
-        <Icon.upVote />
-        {`${article.votes}`}
-        <Icon.downVote />
+        <Vote />
       </div>
       <div className="col-8 col-md-2 order-md-2">
         <Link to={`/articles/${article._id}`}>
@@ -87,7 +97,7 @@ const Article = {
     </div>
   ),
 
-  Complete: ({ articles, match }) => {
+  Complete: ({ articles, match, changeVote }) => {
     const article_id = match.params.article_id;
     const [article] = articles.filter(article => article._id === article_id);
     if (!article) return null;
@@ -101,9 +111,7 @@ const Article = {
         />
         <div className="d-flex justify-content-between align-items-center my-3">
           <div className="d-flex flex-column justify-content-around align-items-center">
-            <Icon.upVote />
-            {`${article.votes}`}
-            <Icon.downVote />
+            <Vote voteObj={article} type={"articles"} changeVote={changeVote} />
           </div>
           <Link
             to={`/users/${article.created_by}`}

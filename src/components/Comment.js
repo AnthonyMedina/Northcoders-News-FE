@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 // import PT from "prop-types";
+import Vote from "./Vote";
 import API from "./utils/API";
 import Icon from "./utils/Icon";
 import "./Comment.css";
@@ -48,9 +49,7 @@ const Comment = {
     return (
       <div className="row shadow p-3 my-3">
         <div className="col-2 d-flex flex-column justify-content-around align-items-center">
-          <Icon.upVote />
-          {`${comment.votes}`}
-          <Icon.downVote />
+          <Vote voteObj={comment} type={"comments"} />
         </div>
         <div className="col-10">
           <div className="w-100 text-capitalize">

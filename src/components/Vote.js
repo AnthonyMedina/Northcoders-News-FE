@@ -52,7 +52,7 @@ class Vote extends Component {
         <button
           type="button"
           className={`btn btn-light ${
-            this.state.voted === "down" ? "upvoted" : ""
+            this.state.voted === "down" ? "downvoted" : ""
           }`}
           onClick={e => this.clickHandler(e)}
           id="down"

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 // import PT from "prop-types";
 import Vote from "./Vote";
 import API from "./utils/API";
-import Icon from "./utils/Icon";
 import "./Comment.css";
 
 const Comment = {

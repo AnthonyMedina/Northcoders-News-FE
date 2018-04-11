@@ -33,10 +33,12 @@ const API = {
       .then(obj => obj.data);
   },
 
-  addComment: article_id => {
-    return axios.post(`${API_URL}/articles/${article_id}/comments`, {
-      comment: "This is my new comment"
-    });
+  postComment: (article_id, input) => {
+    return axios
+      .post(`${API_URL}/articles/${article_id}/comments`, {
+        comment: input
+      })
+      .then(obj => obj.data.comment);
   }
 };
 

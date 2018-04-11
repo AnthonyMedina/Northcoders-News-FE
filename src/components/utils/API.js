@@ -39,6 +39,10 @@ const API = {
         comment: input
       })
       .then(obj => obj.data.comment);
+  },
+
+  deleteComment: comment_id => {
+    return axios.delete(`${API_URL}/comments/${comment_id}`);
   }
 };
 

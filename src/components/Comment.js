@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 // import PT from "prop-types";
 import Vote from "./Vote";
+import DeleteButton from "./DeleteButton";
 import API from "./utils/API";
 import "./Comment.css";
 
@@ -25,6 +26,16 @@ const Comment = {
       );
     };
 
+    deleteComment = comment_id => {
+      API.deleteComment(comment_id).then(
+        this.setState({
+          comments: this.state.comments.filter(
+            comment => comment._id !== comment_id
+          )
+        })
+      );
+    };
+
     render() {
       return (
         <Fragment>
@@ -33,7 +44,13 @@ const Comment = {
             postComment={this.postComment}
           />
           {this.state.comments.map((comment, i) => {
-            return <Comment.Card key={i} comment={comment} />;
+            return (
+              <Comment.Card
+                key={i}
+                comment={comment}
+                deleteComment={this.deleteComment}
+              />
+            );
           })}
         </Fragment>
       );
@@ -41,6 +58,7 @@ const Comment = {
 
     static propTypes = {};
   },
+
   Input: class Input extends Component {
     state = {
       commentInput: ""
@@ -87,11 +105,7 @@ const Comment = {
       );
     }
   },
-  Card: ({ comment }) => {
-    const deleteComment = comment_id => {
-      // API.deleteComment
-    };
-
+  Card: ({ comment, deleteComment }) => {
     if (!comment) return null;
 
     return (
@@ -108,6 +122,9 @@ const Comment = {
           <div className="w-100" />
           {`${comment.body}`}
         </div>
+        {comment.created_by === "northcoder" && (
+          <DeleteButton comment={comment} deleteComment={deleteComment} />
+        )}
       </div>
     );
   }

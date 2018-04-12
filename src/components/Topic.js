@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Route, Link } from "react-router-dom";
 import API from "./utils/API";
 import Article from "./Article";
+import Search from "./Search";
 
 const Topic = {
   Container: class Container extends Component {
@@ -46,8 +47,10 @@ const Topic = {
   ),
   Articles: class Articles extends Component {
     state = {
-      articles: []
+      articles: [],
+      searchTerm: ""
     };
+
     componentDidMount() {
       const { topic_title } = this.props.match.params;
       API.fetchArticlesByTopic(topic_title).then(articles => {
@@ -56,15 +59,26 @@ const Topic = {
         });
       });
     }
+
+    doSearch = searchTerm => {
+      this.setState({
+        searchTerm: searchTerm.toLowerCase().trim()
+      });
+    };
+
     render() {
       if (!this.state.articles) return null;
       const { topic_title } = this.props.match.params;
       return (
         <div className="container">
           <h1 className="my-5 text-capitalize">{`${topic_title}`}</h1>
-          {this.state.articles.map((article, i) => (
-            <Article.Card key={i} article={article} />
-          ))}
+          <Search doSearch={this.doSearch} type="articles" />
+          {this.state.articles.reduce((acc, article, i) => {
+            if (article.title.toLowerCase().includes(this.state.searchTerm)) {
+              acc.push(<Article.Card key={i} article={article} />);
+            }
+            return acc;
+          }, [])}
         </div>
       );
     }

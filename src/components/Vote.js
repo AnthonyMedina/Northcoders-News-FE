@@ -9,6 +9,15 @@ class Vote extends Component {
     votes: this.props.voteObj.votes
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.voteObj.votes !== prevState.votes) {
+      return {
+        votes: nextProps.voteObj.votes
+      };
+    }
+    return null;
+  }
+
   changeVote = vote => {
     if (this.state.voted !== "") return null;
     if (vote === "up") {

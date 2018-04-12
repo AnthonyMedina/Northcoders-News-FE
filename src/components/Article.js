@@ -1,15 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 // import PT from "prop-types";
 import { Route, Link } from "react-router-dom";
 import API from "./utils/API";
 import Comment from "./Comment";
 import Vote from "./Vote";
+import Search from "./Search";
 
 const Article = {
   Container: class Container extends Component {
     state = {
       articles: []
     };
+
     componentDidMount() {
       API.fetchArticles().then(articles => {
         this.setState({
@@ -45,10 +47,30 @@ const Article = {
     static propTypes = {};
   },
 
-  List: ({ articles }) => {
-    return articles.map((article, i) => (
-      <Article.Card key={i} article={article} />
-    ));
+  List: class List extends Component {
+    state = {
+      searchTerm: ""
+    };
+
+    doSearch = searchTerm => {
+      this.setState({
+        searchTerm: searchTerm.toLowerCase().trim()
+      });
+    };
+
+    render() {
+      return (
+        <Fragment>
+          <Search type="articles" doSearch={this.doSearch} />
+          {this.props.articles.reduce((acc, article, i) => {
+            if (article.title.toLowerCase().includes(this.state.searchTerm)) {
+              acc.push(<Article.Card key={i} article={article} />);
+            }
+            return acc;
+          }, [])}
+        </Fragment>
+      );
+    }
   },
 
   Card: ({ article }) => (

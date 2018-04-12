@@ -6,9 +6,11 @@ const DeleteButton = ({ comment, deleteComment }) => {
     deleteComment(comment._id);
   };
   return (
-    <button className="btn btn-danger" onClick={handleClick}>
-      <i className="fas fa-trash-alt" />
-    </button>
+    <div className="d-flex flex-row-reverse w-100">
+      <button className="btn btn-danger" onClick={handleClick}>
+        <i className="fas fa-trash-alt" />
+      </button>
+    </div>
   );
 };
 

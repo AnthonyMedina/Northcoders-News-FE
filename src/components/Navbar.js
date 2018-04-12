@@ -8,7 +8,7 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-lg navbar-light sticky-top nc-red">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            Navbar
+            Home
           </Link>
           <button
             className="navbar-toggler"

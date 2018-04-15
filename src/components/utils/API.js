@@ -24,7 +24,19 @@ const API = {
   },
 
   fetchAllUsers: () => {
-    return axios.get(`${API_URL}/users`).then(obj => obj.data.users);
+    return axios.get(`${API_URL}/users`).then(obj => obj.data);
+  },
+
+  fetchUserArticles: username => {
+    return axios
+      .get(`${API_URL}/users/${username}/articles`)
+      .then(obj => obj.data);
+  },
+
+  fetchUserComments: username => {
+    return axios
+      .get(`${API_URL}/users/${username}/comments`)
+      .then(obj => obj.data);
   },
 
   vote: (type, id, vote) => {

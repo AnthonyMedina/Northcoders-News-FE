@@ -63,6 +63,20 @@ const User = {
       articles: [],
       comments: []
     };
+
+    componentDidMount() {
+      const { username } = this.props.match.params;
+      API.fetchUserArticles(username).then(({ articles }) => {
+        this.setState({
+          articles
+        });
+      });
+      API.fetchUserComments(username).then(({ comments }) => {
+        console.log(comments);
+        this.setState({ comments });
+      });
+    }
+
     render() {
       const { username } = this.props.match.params;
       const [user] = this.props.users.filter(
@@ -71,8 +85,8 @@ const User = {
       return (
         <div className="w-75 mx-auto p-3">
           <User.Details user={user} />
-          {/* <Article.List /> */}
-          {/* <Comment.List /> */}
+          <Article.List articles={this.state.articles} />
+          <Comment.List comments={this.state.comments} />
         </div>
       );
     }

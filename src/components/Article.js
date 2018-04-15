@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 // import PT from "prop-types";
+import moment from "moment";
 import { Route, Link } from "react-router-dom";
 import API from "./utils/API";
 import Comment from "./Comment";
@@ -92,22 +93,22 @@ const Article = {
           <h4 className="card-title">{`${article.title}`}</h4>
         </Link>
         <Link
-          to={`/users/${article.created_by}`}
-          className="card-link text-capitalize"
+          to={`/users/${article.created_by.username}`}
+          className="card-link"
         >
-          {`By ${article.created_by}`}
+          {`Submitted by ${article.created_by.username}`}
         </Link>
-        <Link
-          to={`/topics/${article.belongs_to}`}
-          className="card-link text-capitalize"
-        >
-          {`In ${article.belongs_to}`}
+        <Link to={`/topics/${article.topic}`} className="card-link">
+          {`in ${article.topic}`}
+        </Link>
+        <Link to={``} className="card-link text-capitalize">
+          {`${moment(article.created_at).fromNow()}`}
         </Link>
         <Link
           to={`/articles/${article._id}`}
           className="card-link text-capitalize"
         >
-          {`${article.comments} comments`}
+          {`${article.comments} comment${article.comments === 1 ? "" : "s"}`}
         </Link>
       </div>
     </div>
@@ -132,7 +133,7 @@ const Article = {
           <Link
             to={`/users/${article.created_by}`}
             className="text-capitalize"
-          >{`by ${article.created_by}`}</Link>
+          >{`Submitted by ${article.created_by}`}</Link>
           <Link
             to={`/topics/${article.belongs_to}`}
             className="text-capitalize"

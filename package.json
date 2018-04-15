@@ -21,6 +21,7 @@
   "homepage": "https://github.com/AnthonyMedina/FE-FT-NC-News#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "moment": "^2.22.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-router-dom": "^4.2.2",

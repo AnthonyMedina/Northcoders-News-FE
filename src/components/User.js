@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 // import PT from "prop-types";
 import { Route, Link } from "react-router-dom";
 import API from "./utils/API";
@@ -66,13 +66,12 @@ const User = {
 
     componentDidMount() {
       const { username } = this.props.match.params;
-      API.fetchUserArticles(username).then(({ articles }) => {
+      API.fetchUserArticles(username).then(articles => {
         this.setState({
           articles
         });
       });
       API.fetchUserComments(username).then(({ comments }) => {
-        console.log(comments);
         this.setState({ comments });
       });
     }
@@ -83,18 +82,21 @@ const User = {
         user => user.username === username
       );
       return (
-        <div className="w-75 mx-auto p-3">
+        <Fragment>
           <User.Details user={user} />
           <Article.List articles={this.state.articles} />
-          <Comment.List comments={this.state.comments} />
-        </div>
+          <h3>Comments</h3>
+          {this.state.comments.map((comment, i) => {
+            return <Comment.Card comment={comment} key={i} />;
+          })}
+        </Fragment>
       );
     }
   },
 
   Details: ({ user }) => {
     if (!user) return null;
-    return <h1>{`${user.name}`}</h1>;
+    return <h1 className="my-3">{`${user.name}`}</h1>;
   }
 };
 

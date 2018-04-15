@@ -20,7 +20,7 @@ const API = {
   fetchArticlesByTopic: topic_title => {
     return axios
       .get(`${API_URL}/topics/${topic_title}/articles/`)
-      .then(obj => obj.data.articles);
+      .then(obj => obj.data);
   },
 
   fetchAllUsers: () => {

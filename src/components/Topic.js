@@ -9,6 +9,7 @@ const Topic = {
     state = {
       topics: []
     };
+
     componentDidMount() {
       API.fetchTopics().then(topics => {
         this.setState({
@@ -16,6 +17,7 @@ const Topic = {
         });
       });
     }
+
     render() {
       const { match } = this.props;
       return (
@@ -45,6 +47,7 @@ const Topic = {
       </div>
     </div>
   ),
+
   Articles: class Articles extends Component {
     state = {
       articles: [],

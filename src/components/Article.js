@@ -101,8 +101,8 @@ const Article = {
         <Link to={`/topics/${article.topic}`} className="card-link">
           {`in ${article.topic}`}
         </Link>
-        <Link to={``} className="card-link text-capitalize">
-          {`${moment(article.created_at).fromNow()}`}
+        <Link to={`/articles/`} className="card-link text-capitalize">
+          {moment(article.created_at).fromNow()}
         </Link>
         <Link
           to={`/articles/${article._id}`}
@@ -131,14 +131,14 @@ const Article = {
             <Vote voteObj={article} type={"articles"} changeVote={changeVote} />
           </div>
           <Link
-            to={`/users/${article.created_by}`}
+            to={`/users/${article.created_by.username}`}
             className="text-capitalize"
-          >{`Submitted by ${article.created_by}`}</Link>
-          <Link
-            to={`/topics/${article.belongs_to}`}
-            className="text-capitalize"
-          >
-            In {`${article.belongs_to}`}
+          >{`Submitted by ${article.created_by.username}`}</Link>
+          <Link to={`/articles/${article._id}`} className="text-capitalize">
+            {moment(article.created_at).fromNow()}
+          </Link>
+          <Link to={`/topics/${article.topic}`} className="text-capitalize">
+            In {`${article.topic}`}
           </Link>
         </div>
         <p className="text-justify my-3">{`${article.body}`}</p>

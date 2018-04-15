@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 // import PT from "prop-types";
+import moment from "moment";
 import Vote from "./Vote";
 import DeleteButton from "./DeleteButton";
 import API from "./utils/API";
@@ -114,10 +115,15 @@ const Comment = {
           <Vote voteObj={comment} type={"comments"} />
         </div>
         <div className="col-10">
-          <div className="w-100 text-capitalize">
-            <Link to={`/users/${comment.created_by}`}>{`${
-              comment.created_by
+          <div className="w-50 text-capitalize">
+            <Link to={`/users/${comment.created_by.username}`}>{`${
+              comment.created_by.username
             }`}</Link>
+          </div>
+          <div className="w-50 text-capitalize">
+            <Link to={`/users/${comment.created_by.username}`}>
+              {moment(comment.created_at).fromNow()}
+            </Link>
           </div>
           <div className="w-100" />
           {`${comment.body}`}

@@ -119,7 +119,7 @@ const Article = {
     const [article] = articles.filter(article => article._id === article_id);
     if (!article) return null;
     return (
-      <div className="w-75 mx-auto d-flex flex-column p-3">
+      <Fragment>
         <h1 className="my-3">{`${article.title}`}</h1>
         <img
           className="img-fluid"
@@ -143,7 +143,7 @@ const Article = {
         </div>
         <p className="text-justify my-3">{`${article.body}`}</p>
         <Comment.Container article_id={article_id} />
-      </div>
+      </Fragment>
     );
   }
 };

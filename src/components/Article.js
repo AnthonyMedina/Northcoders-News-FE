@@ -33,7 +33,7 @@ const Article = {
             }}
           />
           <Route
-            path={`${match.url}/articles/:article_id`}
+            path={`/articles/:article_id`}
             render={props => (
               <Article.Complete
                 {...props}

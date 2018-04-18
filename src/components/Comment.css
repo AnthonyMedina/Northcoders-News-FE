@@ -2,3 +2,7 @@ input {
   border: none;
   width: 100%;
 }
+.comment-avatar {
+  max-height: 50px;
+  border-radius: 100%;
+}

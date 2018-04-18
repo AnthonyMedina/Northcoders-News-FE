@@ -89,7 +89,11 @@ const Comment = {
       return (
         <div className="row shadow p-3 my-3">
           <div className="col-2  d-flex align-items-center justify-content-center">
-            Avatar
+            <img
+              className="img-fluid comment-avatar"
+              src="https://avatars3.githubusercontent.com/u/6791502?v=3&s=200"
+              alt=""
+            />
           </div>
           <div className="col-10  d-flex align-items-center justify-content-between">
             <input

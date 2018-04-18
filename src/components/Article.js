@@ -122,7 +122,7 @@ const Article = {
       <Fragment>
         <h1 className="my-3">{`${article.title}`}</h1>
         <img
-          className="img-fluid"
+          className="img-fluid w-100"
           src="https://source.unsplash.com/collection/190727/700x300"
           alt="Random"
         />

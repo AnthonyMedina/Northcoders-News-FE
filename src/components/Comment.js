@@ -19,12 +19,13 @@ const Comment = {
       });
     }
 
-    postComment = (article_id, input) => {
-      API.postComment(article_id, input).then(comment =>
+    postComment = (article_id, input, username) => {
+      API.postComment(article_id, input, username).then(comment => {
+        comment.created_by = { username };
         this.setState({
           comments: [comment, ...this.state.comments]
-        })
-      );
+        });
+      });
     };
 
     deleteComment = comment_id => {
@@ -67,7 +68,11 @@ const Comment = {
 
     handleClick = e => {
       if (this.state.commentInput.length > 0) {
-        this.props.postComment(this.props.article_id, this.state.commentInput);
+        this.props.postComment(
+          this.props.article_id,
+          this.state.commentInput,
+          "northcoder" // hardcode default username for now
+        );
         this.setState({
           commentInput: ""
         });
@@ -106,9 +111,9 @@ const Comment = {
       );
     }
   },
+
   Card: ({ comment, deleteComment }) => {
     if (!comment) return null;
-
     return (
       <div className="row shadow p-3 my-3">
         <div className="col-2 d-flex flex-column justify-content-around align-items-center">
@@ -128,7 +133,7 @@ const Comment = {
           <div className="w-100" />
           {`${comment.body}`}
         </div>
-        {comment.created_by === "northcoder" && (
+        {comment.created_by.username === "northcoder" && (
           <DeleteButton comment={comment} deleteComment={deleteComment} />
         )}
       </div>

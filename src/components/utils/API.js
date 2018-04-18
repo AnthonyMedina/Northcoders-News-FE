@@ -45,12 +45,13 @@ const API = {
       .then(obj => obj.data);
   },
 
-  postComment: (article_id, input) => {
+  postComment: (article_id, input, username) => {
     return axios
       .post(`${API_URL}/articles/${article_id}/comments`, {
-        comment: input
+        comment: input,
+        username
       })
-      .then(obj => obj.data.comment);
+      .then(obj => obj.data);
   },
 
   deleteComment: comment_id => {

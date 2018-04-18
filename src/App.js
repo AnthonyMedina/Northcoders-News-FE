@@ -10,7 +10,7 @@ const App = () => (
   <Router>
     <Fragment>
       <Header />
-      <Route path="/articles" component={Article.Container} />
+      <Route path="/" component={Article.Container} />
       <Route path="/topics" component={Topic.Container} />
       <Route path="/users" component={User.Container} />
     </Fragment>

@@ -1,48 +1,39 @@
-## Northcoders News
+# Northcoders News
 
 Northcoders News is a social news aggregation, web content rating, and discussion website. It is similar to [Reddit](https://www.reddit.com/)
 
-Northcoders News has articles which are divided into topics. Each article has user curated ratings and can be up or down voted using the API.
-Users can also add comments about an article. Comments can also be up or down voted. A user can add comments and remove any comments which
-they have added.
+Northcoders News has articles which are divided into topics. Each article has user curated ratings and can be up or down voted using the API. Users can also add comments about an article. Comments can also be up or down voted. A user can add comments and remove any comments which they have added.
 
-### Objectives
-1. Pull together all the skills and technologies you have learnt over the past three weeks.
-2. Learn about working with a [C.R.U.D](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) application from a front end perspective.
-3. Make more advanced asynchronous API calls.
-4. Begin to familiarise yourself with the various HTTP response codes and update your UI accordingly.
-5. Learn more common HTTP request types `POST`, `PUT` & `DELETE`
-6. Learn more about interacting with a server using URL queries and request bodies.
+You can visit the hosted project [here](URL), hosted on [Netlify](https://www.netlify.com/)
 
-You will be getting the data from your implementation of the Northcoders News API server.
+## Getting Started
 
-### Stages
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-1. Have a look at your API endpoints and at Reddit. Think about what data you have available, and how you will structure your application. What routes will your application have? What articles will you choose to display on the main page?
+Make sure you have [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/) installed on your machine, then clone this repository
 
-2. Set up your routing with React Router. Render dummy components and make sure they are rendering in the right place (with hard-coded data).
+```
+git clone https://github.com/AnthonyMedina/BE-FT-northcoders-news
+```
 
-3. Think about what data each component will need. Where will it come from? Will any components need to pass data down to dumb components as props? Focus on loading a list of articles for your front page first of all.
+Navigate to the correct directory and install node dependencies
 
-4. Consider more complex functionality. You should be able to post a new comment on a topic. NB all comments you post from your app will automatically have the username 'northcoder'. Consider whether the comments will appear in order of popularity or by time.
+```
+npm i
+```
 
-5. You should also be able to delete comments that you have posted. If you try to delete a comment that does not have the author 'northcoder' the API throws an error.
+Run a local version
 
-6. Each comment, and each article, can be upvoted or downvoted. See the [API reference](https://northcoders-news-api.herokuapp.com/) which explains how to to this.
+```
+npm start
+```
 
-### Users
+## Built With
 
-Users are available from the API and have already been busy adding comments to the articles!
-There is also a 'northcoder' user. Any comments you add will belong to the 'northcoder' user and you will also be able to delete those comments using the API.
+* [React](https://reactjs.org/) - A JavaScript library used to make the UI
+* [Bootstrap](https://getbootstrap.com/) - CSS framework
+* [Unsplash](https://unsplash.com/) - Used to generate random images
 
-### Extra credit
+## Acknowledgments
 
-1. Create a route which shows which users have been most active adding articles and comments
-2. Make this route sort the users by how popular they are based on an aggregation of their article and comment vote counts
-3. Implement a filter which re-orders comments based on either the time they were added, or how many votes they have got.
-
-### Important
-
-This sprint is among the ones we'll ask you to complete in order to put you forward for jobs. Put a little bit of love into it! :)
-
-You may use your own API or the one provided above. Start with yours and if you run into problems you can switch to ours (you should only have to change the URL). There's no point in spending a lot of time fixing your server, focus on the front-end.
+* Northcoders

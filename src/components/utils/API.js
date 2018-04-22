@@ -1,6 +1,6 @@
 import axios from "axios";
 // const API_URL = "https://northcoders-news-api.herokuapp.com/api";
-const API_URL = "http://vast-meadow-48089.herokuapp.com/api";
+const API_URL = "https://vast-meadow-48089.herokuapp.com/api";
 
 const API = {
   fetchArticles: () => {

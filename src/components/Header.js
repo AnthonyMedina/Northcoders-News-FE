@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-// import PT from "prop-types";
 import Jumbotron from "./Jumbotron";
 import Navbar from "./Navbar";
 

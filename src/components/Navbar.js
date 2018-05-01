@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import PT from "prop-types";
 import { Link } from "react-router-dom";
 
 class Navbar extends Component {
@@ -45,8 +44,6 @@ class Navbar extends Component {
       </nav>
     );
   }
-
-  static propTypes = {};
 }
 
 export default Navbar;

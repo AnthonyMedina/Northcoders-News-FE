@@ -1,7 +1,7 @@
 import React from "react";
 import "./Jumbotron.css";
 
-const Jumbotron = props => (
+const Jumbotron = () => (
   <div className="jumbotron jumbotron-fluid bg-dark">
     <div className="container">
       <img

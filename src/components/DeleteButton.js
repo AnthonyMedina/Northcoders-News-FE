@@ -1,5 +1,5 @@
 import React from "react";
-// import PT from 'prop-types';]
+import PropTypes from "prop-types";
 
 const DeleteButton = ({ comment, deleteComment }) => {
   const handleClick = e => {
@@ -12,6 +12,13 @@ const DeleteButton = ({ comment, deleteComment }) => {
       </button>
     </div>
   );
+};
+
+DeleteButton.propTypes = {
+  comment: PropTypes.shape({
+    _id: PropTypes.string.isRequired
+  }),
+  deleteComment: PropTypes.func.isRequired
 };
 
 export default DeleteButton;
